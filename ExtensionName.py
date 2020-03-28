@@ -6,9 +6,10 @@ def foldername(extension):
             "exe" : "Software/Applications", 
             "txt" : "Notes/Text", 
             "pdf" : "PDFs", 
-            "c"   : "Code", 
-            "py"  : "Code",
-            "java": "Code",
+            "c"   : "C programs", 
+            "py"  : "Python files",
+            "java": "Java programs", 
+            "cpp" : "Cpp programs", 
             "jpg" : "Images", 
             "png" : "Images",  
             "jpeg": "Images", 
@@ -17,4 +18,4 @@ def foldername(extension):
             "mp4" : "Videos", 
             "mkv" : "Videos", 
         }
-        return switcher.get(extension, "New Folder") #returns "New Folder" if not in dictionary
+        return switcher.get(extension, "Extras") #returns "New Folder" if not in dictionary
