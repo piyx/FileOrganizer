@@ -22,6 +22,10 @@ def organizeFiles():
         print(key)
 
     path = paths[input("\nEnter the folder to be organized:")]
+
+    if (path == "C:/"):
+        print("Cannot make changes to system folder")
+        return 0
     list_files = os.listdir(path)
     list_extension_names = set([os.path.splitext(file)[1].strip(".") for file in list_files])
     #os.path.splitext returns a tuple with file name and extension split
@@ -47,14 +51,15 @@ def organizeFiles():
         if not os.path.exists(path + folder_name + "/" + file):
             shutil.move(path + file, path + folder_name + "/" + file)
             print("Moved {} to {}".format(file, path + folder_name))
+    return 0
 
 
 if(choice == 1):
     organizeFiles()
 elif(choice == 2):
-    pass
+    print("Backup feature not available yet")
 elif(choice == 3):
-    pass
+    print("Feature to be added soon")
 else:
     print("\nInvalid Choice")
 
