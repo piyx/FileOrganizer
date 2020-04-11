@@ -21,7 +21,17 @@ def organizeFiles():
     for key in paths.keys():
         print(key)
 
-    path = paths[input("\nEnter the folder to be organized:")]
+    print("\n1-->Choose Path from above\n2-->Set custom path\n")
+    choice = int(input("Enter choice:"))
+    if choice == 1:
+        path = paths[input("\nEnter the folder to be organized:")]
+    
+    elif choice == 2:
+        path = input("Enter custom path:") + '/'
+        print("\n")
+    else:
+        print("Invalid Choice!")
+        return 0
 
     if (path == "C:/"):
         print("Cannot make changes to system folder")
