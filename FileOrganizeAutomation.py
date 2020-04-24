@@ -13,9 +13,6 @@ paths = {
     "D Drive"   : "D:/"
 }
 
-print("\n\n1:Organize Files\n2:Backup To Drive\n3:Rename Unordered Files")
-choice = int(input("\nEnter choice:"))
-
 def organizeFiles():
     print("\n\nFolders...\n")
     for key in paths.keys():
@@ -64,14 +61,22 @@ def organizeFiles():
     return 0
 
 
-if(choice == 1):
-    organizeFiles()
-elif(choice == 2):
-    print("Backup feature not available yet")
-elif(choice == 3):
-    print("Feature to be added soon")
-else:
-    print("\nInvalid Choice")
+def main():
+    print("\n\n1:Organize Files\n2:Backup To Drive\n3:Rename Unordered Files")
+    choice = int(input("\nEnter choice:"))
+
+    if(choice == 1):
+        organizeFiles()
+    elif(choice == 2):
+        print("Backup feature not available yet")
+    elif(choice == 3):
+        print("Feature to be added soon")
+    else:
+        print("\nInvalid Choice")
+
+
+if __name__ == "__main__":
+    main()
 
 
         
