@@ -18,5 +18,8 @@ def foldername(extension):
             "mp3"  : "Music", 
             "mp4"  : "Videos", 
             "mkv"  : "Videos",
+            "xlsx" : "Excel files",
+            "ppt"  : "Ppt files",
+            "doc"  : "Documents"
         }
         return switcher.get(extension, "Extras") #returns "New Folder" if not in dictionary
