@@ -13,7 +13,6 @@ def organize_files(drive):
     # check os
     operating_system = platform.system()
     if operating_system == 'Darwin':  # Mac
-        # drive = os.path.join(drive, '/')
         drive = os.path.expanduser(drive)
         if not os.path.exists(drive):
             print(f"ERROR! {drive} is not a valid location")
@@ -75,6 +74,8 @@ def organize_files(drive):
                 print(f"Moved {file} to {folder}")
 
         print(f"\nSUCCESS! All files organized in {drive}")
+    else:
+        print(f'{operating_system} not currently supported')
 
 
 if __name__ == "__main__":
