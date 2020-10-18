@@ -1,7 +1,6 @@
 import os
 import sys
 import shutil
-import argparse
 from ext import foldername
 
 FILE_NAME = "organize.py"
