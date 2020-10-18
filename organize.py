@@ -1,47 +1,86 @@
 import os
-import sys
+import platform
 import shutil
+import sys
+
 from ext import foldername
 
 FILE_NAME = "organize.py"
 EXT_NAME = "ext.py"
 
 
-def organize_files(path):
-    path = path+'\\'
-    if not os.path.exists(path):
-        print("ERROR! Invalid location")
-        return
-    files = os.listdir(path)
-    extns = set([os.path.splitext(file)[1].strip('.') for file in files])
+def organize_files(drive):
+    # check os
+    operating_system = platform.system()
+    if operating_system == 'Darwin':  # Mac
+        # drive = os.path.join(drive, '/')
+        drive = os.path.expanduser(drive)
+        if not os.path.exists(drive):
+            print(f"ERROR! {drive} is not a valid location")
+            return
+        files = os.listdir(drive)
+        extns = {os.path.splitext(file)[1].strip('.') for file in files}
+        # Create Folders
+        for ext in extns:
+            folder = foldername(ext)
+            if folder and not os.path.exists(os.path.join(drive, folder)):
+                os.makedirs(os.path.join(drive, folder))
 
-    # Create Folders
-    for ext in extns:
-        folder = foldername(ext)
-        if folder and not os.path.exists(path+folder):
-            os.makedirs(path+folder)
+        # Move Files To Folders
+        for file in files:
+            if file in [FILE_NAME, EXT_NAME]:
+                continue
+            ext = os.path.splitext(file)[1].strip('.')
+            folder = foldername(ext)
+            if not folder:
+                continue
 
-    # Move Files To Folders
-    for file in files:
-        if file in [FILE_NAME, EXT_NAME]:
-            continue
-        ext = os.path.splitext(file)[1].strip('.')
-        folder = foldername(ext)
-        if not folder:
-            continue
+            src = os.path.join(drive, file)
+            dest = os.path.join(drive, folder, file)
 
-        src = path+file
-        dest = path+folder+'/'+file
+            if not os.path.exists(dest):
+                shutil.move(src, dest)
+                print(f"Moved {file} to {folder}")
 
-        if not os.path.exists(dest):
-            shutil.move(src, dest)
-            print(f"Moved {file} to {folder}")
+        print(f"\nSUCCESS! All files organized in {drive}")
 
-    print(f"\nSUCCESS! All files organized in {path}")
+    elif operating_system == 'Windows':  # Windows
+        drive = drive + '\\'
+        if not os.path.exists(drive):
+            print("ERROR! Invalid location")
+            return
+        files = os.listdir(drive)
+        extns = {os.path.splitext(file)[1].strip('.') for file in files}
+
+        # Create Folders
+        for ext in extns:
+            folder = foldername(ext)
+            if folder and not os.path.exists(drive + folder):
+                os.makedirs(drive + folder)
+
+        # Move Files To Folders
+        for file in files:
+            if file in [FILE_NAME, EXT_NAME]:
+                continue
+            ext = os.path.splitext(file)[1].strip('.')
+            folder = foldername(ext)
+            if not folder:
+                continue
+
+            src = drive + file
+            dest = drive + folder + '/' + file
+
+            if not os.path.exists(dest):
+                shutil.move(src, dest)
+                print(f"Moved {file} to {folder}")
+
+        print(f"\nSUCCESS! All files organized in {drive}")
 
 
-try:
-    location = sys.argv[1]
-    organize_files(location)
-except Exception:
-    print("USAGE: python organize.py <location>")
+if __name__ == "__main__":
+    try:
+        location = sys.argv[1]
+        organize_files(location)
+    except Exception as e:
+        print("USAGE: python organize.py <location>")
+        print(e)
