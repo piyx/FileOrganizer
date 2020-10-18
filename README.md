@@ -24,3 +24,8 @@ Automatically organizes files in your computer
 
 ![](imgs/output.png)
 
+
+### Errors
+
+![](imgs/errors.png)
+
