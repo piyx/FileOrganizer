@@ -22,7 +22,7 @@ def organize_files(path):
         print("ERROR! Invalid location")
         return
     files = os.listdir(path)
-    extns = {os.path.splitext(file)[1].strip('.') for file in files}
+    extns = {os.path.splitext(file)[1].strip(".") for file in files}
 
     # Create Folders
     for ext in extns:
@@ -34,13 +34,13 @@ def organize_files(path):
     for file in files:
         if file in [FILE_NAME, EXT_NAME]:
             continue
-        ext = os.path.splitext(file)[1].strip('.')
+        ext = os.path.splitext(file)[1].strip(".")
         folder = foldername(ext)
         if not folder:
             continue
 
         src = path + file
-        dest = path + folder + '/' + file
+        dest = path + folder + "/" + file
 
         if not os.path.exists(dest):
             shutil.move(src, dest)
