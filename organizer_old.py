@@ -1,17 +1,18 @@
 import os
 import shutil
-import ExtensionName as ext
+import ext
 
 FileName = "FileOrganizeAutomation.py"
 ExtensionModule = "ExtensionName.py"
 
 paths = {
-    "Downloads" : "Downloads/", 
-    "Desktop"   : "Desktop/",  
-    "Documents" : "Documents/", 
-    "C Drive"   : "C:/",   
-    "D Drive"   : "D:/"
+    "Downloads": "Downloads/",
+    "Desktop": "Desktop/",
+    "Documents": "Documents/",
+    "C Drive": "C:/",
+    "D Drive": "D:/"
 }
+
 
 def organizeFiles():
     print("\n\nFolders...\n")
@@ -22,7 +23,7 @@ def organizeFiles():
     choice = int(input("Enter choice:"))
     if choice == 1:
         path = paths[input("\nEnter the folder to be organized:")]
-    
+
     elif choice == 2:
         path = input("Enter custom path:") + '/'
         print("\n")
@@ -34,20 +35,21 @@ def organizeFiles():
         print("Cannot make changes to system folder")
         return 0
     list_files = os.listdir(path)
-    list_extension_names = set([os.path.splitext(file)[1].strip(".") for file in list_files])
-    #os.path.splitext returns a tuple with file name and extension split
+    list_extension_names = set(
+        [os.path.splitext(file)[1].strip(".") for file in list_files])
+    # os.path.splitext returns a tuple with file name and extension split
     #Eg: Filename = Hello.txt
-    #-----> os.path.splitext(file) returns ("Hello", ".txt")
+    # -----> os.path.splitext(file) returns ("Hello", ".txt")
 
-    #Create New Folders
+    # Create New Folders
     for extension in list_extension_names:
         folder_name = ext.foldername(extension)
-        if(folder_name == None):                       #Folder_name = None --> Its a folder
-            continue                                   #No need to make new folder
+        if(folder_name == None):  # Folder_name = None --> Its a folder
+            continue  # No need to make new folder
         if not os.path.exists(path + folder_name):
             os.makedirs(path + folder_name)
-    
-    #Move Files To Respective Folder
+
+    # Move Files To Respective Folder
     for file in list_files:
         if(file == FileName or file == ExtensionModule):
             continue
@@ -76,8 +78,5 @@ def main():
 
 
 if __name__ == "__main__":
+    print(os.listdir("C:/Users/ctrla/Downloads/"))
     main()
-
-
-        
-
