@@ -12,7 +12,7 @@ EXT_NAME = "ext.py"
 def organize_files(path):
     operating_system = platform.system()
     if operating_system == "Windows":  # Windows
-        path = path + "\\"
+        pass
     elif operating_system == "Darwin":  # Mac
         path = os.path.expanduser(path)
     else:
@@ -26,21 +26,23 @@ def organize_files(path):
 
     # Create Folders
     for ext in extns:
-        folder = foldername(ext)
-        if folder and not os.path.exists(path + folder):
-            os.makedirs(path + folder)
+        folder = foldername(ext) or ''
+        new = os.path.join(path, folder)
+        if folder and not os.path.exists(new):
+            os.makedirs(new)
 
     # Move Files To Folders
     for file in files:
         if file in [FILE_NAME, EXT_NAME]:
             continue
+
         ext = os.path.splitext(file)[1].strip(".")
         folder = foldername(ext)
         if not folder:
             continue
 
-        src = path + file
-        dest = path + folder + "/" + file
+        src = os.path.join(path, file)
+        dest = os.path.join(path, folder, file)
 
         if not os.path.exists(dest):
             shutil.move(src, dest)
@@ -49,9 +51,10 @@ def organize_files(path):
     print(f"\nSUCCESS! All files organized in {path}")
 
 
-try:
-    location = sys.argv[1]
-    organize_files(location)
-except Exception as e:
-    print(f"error {e}")
-    print("USAGE: python organize.py <location>")
+if __name__ == "__main__":
+    try:
+        location = sys.argv[1]
+        organize_files(location)
+    except Exception as e:
+        print(f"error {e}")
+        print("USAGE: python organize.py <location>")
