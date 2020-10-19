@@ -10,17 +10,10 @@ EXT_NAME = "ext.py"
 
 
 def organize_files(path):
-    operating_system = platform.system()
-    if operating_system == "Windows":  # Windows
-        pass
-    elif operating_system == "Darwin":  # Mac
-        path = os.path.expanduser(path)
-    else:
-        print(f"Operating system {operating_system} not currently supported")
-        sys.exit(0)
     if not os.path.exists(path):
         print("ERROR! Invalid location")
         return
+
     files = os.listdir(path)
     extns = {os.path.splitext(file)[1].strip(".") for file in files}
 
