@@ -49,5 +49,5 @@ if __name__ == "__main__":
         location = sys.argv[1]
         organize_files(location)
     except Exception as e:
-        print(f"error {e}")
+        print(f"Error: {e}")
         print("USAGE: python organize.py <location>")
