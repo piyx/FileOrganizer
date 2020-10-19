@@ -2,8 +2,8 @@ import os
 import shutil
 import ext
 
-FileName = "FileOrganizeAutomation.py"
-ExtensionModule = "ExtensionName.py"
+FileName = "old.py"
+ExtensionModule = "ext.py"
 
 paths = {
     "Downloads": "Downloads/",
@@ -78,5 +78,4 @@ def main():
 
 
 if __name__ == "__main__":
-    print(os.listdir("C:/Users/ctrla/Downloads/"))
     main()
