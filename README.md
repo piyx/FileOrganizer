@@ -1,4 +1,4 @@
-# file-organizer
+# FileOrganizer
 
 Automatically organizes files in your computer
 
