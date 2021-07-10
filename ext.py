@@ -1,8 +1,8 @@
 def foldername(extension):
     if(extension == ""):
         return None
-    else:
-        switcher = {
+    
+    switcher = {
             "exe"  : "Software", 
             "txt"  : "Notes-Text", 
             "pdf"  : "PDFs", 
