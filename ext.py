@@ -22,4 +22,4 @@ def foldername(extension):
             "ppt"  : "Ppt files",
             "doc"  : "Documents"
         }
-        return switcher.get(extension, "Extras") #returns "Extras" if not in dictionary
+    return switcher.get(extension, "Extras") #returns "Extras" if not in dictionary
